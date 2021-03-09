@@ -37,3 +37,7 @@ module.exports = forEach;
 Array.prototype.customForEach = forEach;
 
 [1, 2, 3].customForEach((item) => console.log(item + 100));
+
+// 101
+// 102
+//103
