@@ -1,4 +1,4 @@
-A List of JavaScript Polyfills for Higher Order Functions
+# A List of JavaScript Polyfills for Higher Order Functions
 
 This project is basically for all the JavaScript Enthusiasts who wants to learn how JavaScript Higher Order Functions like .map(),
 .filter() , .reduce(), .every(), .some() works under the hood.
