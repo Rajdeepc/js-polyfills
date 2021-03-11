@@ -252,7 +252,15 @@ function some(callback) {
               `);
   }
 
-  return !!this.filter(callback).length; // changing the length to boolean, if 0 == false 1 == true
+  let result = []; // map will return a new array here
+  
+  for (var index = 0; index < this.length; index++) {
+      if(callback(this[index], index, this)){ // check for condition
+          result.push(this[index]) // push the item which true for the condition
+      }
+  }
+
+  return !!result.length; // changing the length to boolean, if 0 == false 1 == true
 }
 
 module.exports = some;
@@ -263,6 +271,7 @@ console.log([100, 102, 103].customSome((item) => item > 100));
 // true 
 console.log([100, 102, 103].customSome((item) => item > 105));
 // false 
+
 ```
 
 Feel free to open a PR. I would be happy to merge it.
