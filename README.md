@@ -8,7 +8,7 @@ This list covers:
 ## 1. Creating a Polyfill of .map() method.
 
 ```JavaScript
-    // map does transformation on the array and returns a new array of same length
+// map does transformation on the array and returns a new array of same length
 
 function map(callback) {
   // Check 1 - Check whether incoming array is underfined or null
@@ -231,7 +231,7 @@ Array.prototype.customForEach = forEach;
 // 102
 // 103
 ```
-## 6. Creating a polyfill for some method
+## 6. Creating a polyfill for some() method
 
 ```JavaScript
 // some method finds some element in the array which matches a condition and returns a boolean
