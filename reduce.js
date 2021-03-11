@@ -53,7 +53,7 @@ Array.prototype.customReduce = reduce
 
 
 
-const sum = (s, v) => s + v;
+const add = (s, v) => s + v;
 const callerArray = [1, 2, 3];
-const output = callerArray.customReduce(sum, 1);
+const output = callerArray.customReduce(add, 1);
 console.log(output);
