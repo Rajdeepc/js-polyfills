@@ -15,7 +15,7 @@ function map(callback) {
   if (this === undefined || this === null) {
     // this points to your array
     throw new TypeError(`
-                Array.prototype.reduce is called on a null value
+                Array.prototype.map is called on a null value
             `);
   }
 
@@ -25,15 +25,7 @@ function map(callback) {
             ${callback} is not a function
             `);
   }
-  // Check 3 - Reduce on empty array with no initial Value
-  if (!this.length) {
-    if (arguments.length < 2) {
-      throw new TypeError(`
-            Reduce is called on an empty array with no initial Value`);
-    } else if (arguments.length === 2) {
-      return initialValue;
-    }
-  }
+ 
 
   let result = []; // map will return a new array here
 
@@ -62,7 +54,7 @@ function filter(callback) {
     if (this === undefined || this === null) {
       // this points to your array
       throw new TypeError(`
-                  Array.prototype.reduce is called on a null value
+                  Array.prototype.filter is called on a null value
               `);
     }
   
@@ -72,15 +64,7 @@ function filter(callback) {
               ${callback} is not a function
               `);
     }
-    // Check 3 - Reduce on empty array with no initial Value
-    if (!this.length) {
-      if (arguments.length < 2) {
-        throw new TypeError(`
-              Reduce is called on an empty array with no initial Value`);
-      } else if (arguments.length === 2) {
-        return initialValue;
-      }
-    }
+ 
   
     let result = []; // map will return a new array here
   
@@ -175,7 +159,7 @@ function find(callback) {
   if (this === undefined || this === null) {
     // this points to your array
     throw new TypeError(`
-                  Array.prototype.reduce is called on a null value
+                  Array.prototype.find is called on a null value
               `);
   }
 
@@ -185,15 +169,7 @@ function find(callback) {
               ${callback} is not a function
               `);
   }
-  // Check 3 - Reduce on empty array with no initial Value
-  if (!this.length) {
-    if (arguments.length < 2) {
-      throw new TypeError(`
-              Reduce is called on an empty array with no initial Value`);
-    } else if (arguments.length === 2) {
-      return initialValue;
-    }
-  }
+
 
   let result = []; // map will return a new array here
 
@@ -216,7 +192,7 @@ const findObject = [1, 2, 3].customFind((item) => item > 1 && item < 3);
 
 console.log(findObject);
 ```
-5. Creating a Polyfill of .forEach() method.
+## 5. Creating a Polyfill of .forEach() method.
 
 ```JavaScript
 // creating a forEach polyfill
@@ -228,7 +204,7 @@ function forEach(callback) {
   if (this === undefined || this === null) {
     // this points to your array
     throw new TypeError(`
-                Array.prototype.reduce is called on a null value
+                Array.prototype.forEach is called on a null value
             `);
   }
 
@@ -238,15 +214,7 @@ function forEach(callback) {
             ${callback} is not a function
             `);
   }
-  // Check 3 - Reduce on empty array with no initial Value
-  if (!this.length) {
-    if (arguments.length < 2) {
-      throw new TypeError(`
-            Reduce is called on an empty array with no initial Value`);
-    } else if (arguments.length === 2) {
-      return initialValue;
-    }
-  }
+
 
   for (var index = 0; index < this.length; index++) {
     callback(this[index], index, this); // calls callback recursively with currentValue, currentIndex and the whole array
@@ -263,9 +231,41 @@ Array.prototype.customForEach = forEach;
 // 102
 // 103
 ```
+## 6. Creating a polyfill for some method
 
+```JavaScript
+// some method finds some element in the array which matches a condition and returns a boolean
+
+function some(callback) {
+  // Check 1 - Check whether incoming array is underfined or null
+  if (this === undefined || this === null) {
+    // this points to your array
+    throw new TypeError(`
+                  Array.prototype.some is called on a null value
+              `);
+  }
+
+  // Check 2 - Check whether callback is a function or not
+  if (!callback || typeof callback !== "function") {
+    throw new TypeError(`
+              ${callback} is not a function
+              `);
+  }
+
+  return !!this.filter(callback).length; // changing the length to boolean, if 0 == false 1 == true
+}
+
+module.exports = some;
+
+Array.prototype.customSome = some;
+
+console.log([100, 102, 103].customSome((item) => item > 100));
+// true 
+console.log([100, 102, 103].customSome((item) => item > 105));
+// false 
+```
 
 Feel free to open a PR. I would be happy to merge it.
 
-License: MIT
-Feel free to use the code in your production
+License: MIT <br>
+Feel free to use this code in production

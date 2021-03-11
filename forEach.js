@@ -7,7 +7,7 @@ function forEach(callback) {
   if (this === undefined || this === null) {
     // this points to your array
     throw new TypeError(`
-                Array.prototype.reduce is called on a null value
+                Array.prototype.forEach is called on a null value
             `);
   }
 
@@ -17,15 +17,7 @@ function forEach(callback) {
             ${callback} is not a function
             `);
   }
-  // Check 3 - Reduce on empty array with no initial Value
-  if (!this.length) {
-    if (arguments.length < 2) {
-      throw new TypeError(`
-            Reduce is called on an empty array with no initial Value`);
-    } else if (arguments.length === 2) {
-      return initialValue;
-    }
-  }
+
 
   for (var index = 0; index < this.length; index++) {
     callback(this[index], index, this); // calls callback recursively with currentValue, currentIndex and the whole array
